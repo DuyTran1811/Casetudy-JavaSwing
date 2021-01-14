@@ -73,10 +73,7 @@ public class AccountLogin implements Serializable{
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.passWord, other.passWord)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.passWord, other.passWord);
     }
 
   

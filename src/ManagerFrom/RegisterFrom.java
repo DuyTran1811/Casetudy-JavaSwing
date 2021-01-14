@@ -21,6 +21,7 @@ public class RegisterFrom extends javax.swing.JFrame {
      */
     public RegisterFrom() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public RegisterFrom(LoginFrom loginFrom) {
