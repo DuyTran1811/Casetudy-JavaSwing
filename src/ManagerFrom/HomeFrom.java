@@ -5,19 +5,28 @@
  */
 package ManagerFrom;
 
+import Model.AccountLogin;
+
 /**
  *
  * @author turtle
  */
 public class HomeFrom extends javax.swing.JFrame {
-
+    private AccountLogin accountLogin;
     /**
      * Creates new form HomeFrom
      */
     public HomeFrom() {
         initComponents();
-    }
+        setLocationRelativeTo(null);
 
+    }
+    
+    public HomeFrom(AccountLogin acc){
+        this();
+        accountLogin = acc;
+        txtGreting.setText("Xin Chao "+acc.getEmail()+" !");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,17 +36,59 @@ public class HomeFrom extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtGreting = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(750, 480));
+
+        jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Welcome to car management software");
+
+        txtGreting.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
+        txtGreting.setText("Xin Chào");
+
+        jLabel3.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Bạn đã đăng nhập Thành công");
+
+        jButton1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
+        jButton1.setText("OK");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(331, 331, 331))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(317, 317, 317)
+                .addComponent(txtGreting)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1)
+                .addGap(90, 90, 90)
+                .addComponent(txtGreting)
+                .addGap(69, 69, 69)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(54, 54, 54))
         );
 
         pack();
@@ -79,5 +130,9 @@ public class HomeFrom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel txtGreting;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,9 +52,9 @@ public class AccountLogin implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.email);
-        hash = 97 * hash + Objects.hashCode(this.passWord);
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.passWord);
         return hash;
     }
 
@@ -73,9 +73,13 @@ public class AccountLogin implements Serializable{
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        return Objects.equals(this.passWord, other.passWord);
+        if (!Objects.equals(this.passWord, other.passWord)) {
+            return false;
+        }
+        return true;
     }
-    
+
+  
     /**
      * @param args the command line arguments
      */

@@ -5,17 +5,27 @@
  */
 package ManagerFrom;
 
+import Model.AccountLogin;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author turtle
  */
 public class RegisterFrom extends javax.swing.JFrame {
 
+    private LoginFrom loginFrom;
+
     /**
      * Creates new form RegisterFrom
      */
     public RegisterFrom() {
         initComponents();
+    }
+
+    public RegisterFrom(LoginFrom loginFrom) {
+        this();
+        this.loginFrom = loginFrom;
     }
 
     /**
@@ -27,21 +37,146 @@ public class RegisterFrom extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
+        txtPassWord = new javax.swing.JPasswordField();
+        txtRegisterPassWord = new javax.swing.JPasswordField();
+        btnRegister = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Đăng Ký");
+
+        jLabel2.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jLabel2.setText("Email");
+
+        jLabel3.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jLabel3.setText("Phone Number");
+
+        jLabel4.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jLabel4.setText("Password");
+
+        jLabel5.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jLabel5.setText("Enter the password");
+
+        txtEmail.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+
+        txtPhoneNumber.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+
+        txtPassWord.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+
+        txtRegisterPassWord.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+
+        btnRegister.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
+        btnRegister.setText("Đăng Ký");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
+        btnCancel.setText("Huỷ Bỏ");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEmail)
+                    .addComponent(txtPhoneNumber)
+                    .addComponent(txtPassWord)
+                    .addComponent(txtRegisterPassWord, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(btnRegister)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addComponent(btnCancel)
+                .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(txtRegisterPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel3)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel4)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel5)))
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister)
+                    .addComponent(btnCancel))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        String email = txtEmail.getText();
+        String phone = txtPhoneNumber.getText();
+        String password = new String(txtPassWord.getPassword());
+        String repassword = new String(txtRegisterPassWord.getPassword());
+        if (!email.isEmpty() && !phone.isEmpty() && !password.isEmpty() && !repassword.isEmpty()) {
+            if (password.compareTo(repassword) == 0) {
+                AccountLogin acc = new AccountLogin(email, phone, password);
+                loginFrom.setAccount(acc);
+                JOptionPane.showMessageDialog(rootPane, " Tạo Tài Khoản Thành Công");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Tạo Tài Khoản Thất Bại\n"
+                        + "Mật Khẩu Không Trùng Khớp");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Tất Cả Các Trường Không Được Để Trống");
+        }
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +214,16 @@ public class RegisterFrom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassWord;
+    private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JPasswordField txtRegisterPassWord;
     // End of variables declaration//GEN-END:variables
 }

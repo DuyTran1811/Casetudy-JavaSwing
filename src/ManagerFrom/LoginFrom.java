@@ -5,17 +5,34 @@
  */
 package ManagerFrom;
 
+import Model.AccountLogin;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author turtle
  */
 public class LoginFrom extends javax.swing.JFrame {
 
+    private List<AccountLogin> account;
+    private static final String FILE_FASSWORD = "ACC.DAT";
     /**
      * Creates new form LoginFrom
      */
     public LoginFrom() {
         initComponents();
+        setLocationRelativeTo(null);
+        loadData();
     }
 
     /**
@@ -31,9 +48,9 @@ public class LoginFrom extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         btnLongin = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -50,8 +67,6 @@ public class LoginFrom extends javax.swing.JFrame {
 
         txtEmail.setFont(new java.awt.Font(".SF NS Text", 1, 14)); // NOI18N
 
-        txtPassword.setFont(new java.awt.Font(".SF NS Text", 1, 14)); // NOI18N
-
         btnLongin.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
         btnLongin.setText("Đăng Nhập");
         btnLongin.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +77,13 @@ public class LoginFrom extends javax.swing.JFrame {
 
         btnRegister.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
         btnRegister.setText("Đăng Ký");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        txtPassword.setFont(new java.awt.Font(".SF NS Text", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,9 +108,9 @@ public class LoginFrom extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPassword)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 142, Short.MAX_VALUE)))
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                    .addComponent(txtPassword))))
+                        .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,7 +126,7 @@ public class LoginFrom extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLongin)
                     .addComponent(btnRegister))
@@ -116,7 +138,21 @@ public class LoginFrom extends javax.swing.JFrame {
 
     private void btnLonginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLonginActionPerformed
         // TODO add your handling code here:
+        String email = txtEmail.getText();
+        String password = new String(txtPassword.getPassword());
+        AccountLogin acc = new AccountLogin(email, "",password);
+        if (account != null&& account.contains(acc)) {
+            HomeFrom homeFrom = new HomeFrom(acc);
+            homeFrom.setVisible(true);
+            this.dispose();
+        }else JOptionPane.showMessageDialog(rootPane,"Email Hoặc Mật Khẩu Không Đúng !");
     }//GEN-LAST:event_btnLonginActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        RegisterFrom registerFrom = new RegisterFrom(this);
+        registerFrom.setVisible(true);
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +196,36 @@ public class LoginFrom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        try(FileInputStream fis = new FileInputStream(FILE_FASSWORD);
+                ObjectInputStream ois = new ObjectInputStream(fis)){
+            account = (List<AccountLogin>)ois.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginFrom.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(LoginFrom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void writeToFile(){
+        try(FileOutputStream fos = new FileOutputStream(FILE_FASSWORD);
+                ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(account);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginFrom.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFrom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setAccount(AccountLogin acc){
+        if (account == null) {
+            account = new ArrayList<>();
+        }
+        account.add(acc);
+        writeToFile();
+    }
 }
