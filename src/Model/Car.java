@@ -15,13 +15,14 @@ public class Car {
     private String brand; // Hãng
     private float price;  // Giá
     private String color; // mầu Xe
-    private byte seat;    // chỗ ngồi
+    private int seat;    // chỗ ngồi
     private String year;  // Năm Sản Xuất
 
     public Car() {
     }
 
-    public Car(String id, String name, String brand, float price, String color, byte seat, String year) {
+    public Car(String id, String name, String brand,
+            float price, String color, int seat, String year) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -71,11 +72,11 @@ public class Car {
         this.color = color;
     }
 
-    public byte getSeat() {
+    public int getSeat() {
         return seat;
     }
 
-    public void setSeat(byte seat) {
+    public void setSeat(int seat) {
         this.seat = seat;
     }
 

@@ -5,17 +5,28 @@
  */
 package ManagerFrom;
 
+import Model.Car;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author turtle
  */
 public class TableFrom extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private List<Car>listCar;
+    private int stt;
     /**
      * Creates new form TableFrom
      */
     public TableFrom() {
         initComponents();
+        setLocationRelativeTo(null);
+        listCar = new ArrayList<>();
+        tableModel = (DefaultTableModel) tableCar.getModel();
+        stt = 1;
     }
 
     /**
@@ -40,14 +51,14 @@ public class TableFrom extends javax.swing.JFrame {
         bntSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCar = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtId = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        ComboboxBrand = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
+        ComBoboxColor = new javax.swing.JComboBox<>();
+        txtPrice = new javax.swing.JTextField();
+        ComboboxSeat = new javax.swing.JComboBox<>();
+        txtYear = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,6 +110,7 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
+        bntSearch.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
         bntSearch.setText("Tìm Kiếm");
         bntSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +128,7 @@ public class TableFrom extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Byte.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -132,31 +144,30 @@ public class TableFrom extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableCar);
 
-        jTextField1.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jTextField1.setText("jTextField1");
+        txtId.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jTextField2.setText("jTextField2");
+        txtName.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboboxBrand.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
+        ComboboxBrand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinfast", "Mercedes – Benz", "Cadillac", "Ford", "BMW", "Rolls Royce", "Audi", "Lexus", "Geely", "Porsche", "Bugatti", "Land Rover", "Lamborghini", "Ferrari", "Toyota", "Honda", "Bentley", "Aston Martin", "Volkswagen", "Nissan", "Renault", "KIA", "Mazda", "Hyundai", "Chevrolet" }));
 
         jLabel8.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
         jLabel8.setText("Giá Xe");
 
-        jComboBox2.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComBoboxColor.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
+        ComBoboxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Black", "White", "Silver", "Gray", "Red", "Yearllow", "Purple" }));
 
-        jTextField3.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jTextField3.setText("jTextField3");
+        txtPrice.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboboxSeat.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
+        ComboboxSeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "7", "16", "30", "35", "45" }));
 
-        jTextField4.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
+        txtYear.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,16 +204,16 @@ public class TableFrom extends javax.swing.JFrame {
                                         .addGap(29, 29, 29)
                                         .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(19, 19, 19)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ComboboxBrand, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                                .addComponent(ComBoboxColor, javax.swing.GroupLayout.Alignment.LEADING, 0, 135, Short.MAX_VALUE)
+                                .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ComboboxSeat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntAdd)
@@ -219,40 +230,39 @@ public class TableFrom extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(23, 23, 23)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addGap(26, 26, 26)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboboxBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(23, 23, 23)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComBoboxColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addGap(26, 26, 26)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(31, 31, 31)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboboxSeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel4)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel5)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel8)
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel6)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel7))
+                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAdd)
                     .addComponent(bntEdit)
                     .addComponent(bntDelete))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,6 +270,16 @@ public class TableFrom extends javax.swing.JFrame {
 
     private void bntAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddActionPerformed
         // TODO add your handling code here:
+        String id = txtId.getText();
+        String name = txtName.getText();
+        String brand = ComboboxBrand.getSelectedItem().toString();
+        float price = Float.parseFloat(txtPrice.getText());
+        String color = (String) ComBoboxColor.getSelectedItem();
+        int seat = Integer.parseInt(ComBoboxColor.getSelectedItem().toString());
+        String year = txtYear.getText();
+        Car car = new Car(id,name,brand,price,color,seat,year);
+        listCar.add(car);
+        showCar(car);
     }//GEN-LAST:event_bntAddActionPerformed
 
     private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
@@ -273,6 +293,10 @@ public class TableFrom extends javax.swing.JFrame {
     private void bntSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bntSearchActionPerformed
+
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,13 +334,13 @@ public class TableFrom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComBoboxColor;
+    private javax.swing.JComboBox<String> ComboboxBrand;
+    private javax.swing.JComboBox<String> ComboboxSeat;
     private javax.swing.JButton bntAdd;
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntEdit;
     private javax.swing.JButton bntSearch;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -326,11 +350,20 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tableCar;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
+
+    private void showCar(Car car) {
+        var row = new Object[]{
+            stt++,car.getId(),car.getName(),car.getBrand(),car.getPrice(),
+            car.getColor(),car.getSeat(),car.getYear()
+        };
+        tableModel.addRow(row);
+        tableModel.fireTableDataChanged();
+    }
 }
