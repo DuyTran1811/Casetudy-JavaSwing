@@ -7,6 +7,8 @@ package ManagerFrom;
 
 import Model.Car;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -61,7 +63,7 @@ public class TableFrom extends javax.swing.JFrame {
         bntAdd = new javax.swing.JButton();
         bntEdit = new javax.swing.JButton();
         bntDelete = new javax.swing.JButton();
-        bntSearch = new javax.swing.JButton();
+        bntSortDow = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCar = new javax.swing.JTable();
         txtId = new javax.swing.JTextField();
@@ -73,6 +75,8 @@ public class TableFrom extends javax.swing.JFrame {
         ComboboxSeat = new javax.swing.JComboBox<>();
         txtYear = new javax.swing.JTextField();
         txtSrearch = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 580));
@@ -123,11 +127,11 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
-        bntSearch.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
-        bntSearch.setText("Tìm Kiếm");
-        bntSearch.addActionListener(new java.awt.event.ActionListener() {
+        bntSortDow.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        bntSortDow.setText("Giam Dan");
+        bntSortDow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSearchActionPerformed(evt);
+                bntSortDowActionPerformed(evt);
             }
         });
 
@@ -188,6 +192,16 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jLabel9.setText("Tìm Kiếm");
+
+        jButton1.setText("Tang Dan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,11 +209,7 @@ public class TableFrom extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(bntSearch)
-                .addGap(78, 78, 78))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,25 +224,34 @@ public class TableFrom extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addComponent(bntEdit)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ComboboxBrand, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
                                 .addComponent(ComBoboxColor, javax.swing.GroupLayout.Alignment.LEADING, 0, 135, Short.MAX_VALUE)
                                 .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ComboboxSeat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(ComboboxSeat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(13, 13, 13)
+                                            .addComponent(bntEdit)
+                                            .addGap(29, 29, 29)
+                                            .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(51, 51, 51)
+                                            .addComponent(bntSortDow)
+                                            .addGap(56, 56, 56)
+                                            .addComponent(jButton1))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(19, 19, 19)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntAdd)
@@ -244,8 +263,8 @@ public class TableFrom extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(bntSearch)
-                    .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -280,7 +299,9 @@ public class TableFrom extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAdd)
                     .addComponent(bntEdit)
-                    .addComponent(bntDelete))
+                    .addComponent(bntDelete)
+                    .addComponent(bntSortDow)
+                    .addComponent(jButton1))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -342,7 +363,6 @@ public class TableFrom extends javax.swing.JFrame {
     }//GEN-LAST:event_bntEditActionPerformed
 
     private void bntDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeleteActionPerformed
-        // TODO add your handling code here:
         if (listCar.size() > 0) {
             int selectIndex = tableCar.getSelectedRow();
             if (selectIndex != -1) {
@@ -363,9 +383,17 @@ public class TableFrom extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntDeleteActionPerformed
 
-    private void bntSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearchActionPerformed
+    private void bntSortDowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSortDowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bntSearchActionPerformed
+        Collections.sort(listCar,new Comparator<Car>(){
+            @Override
+            public int compare(Car o1, Car o2) {
+                return Float.compare(o2.getPrice(), o1.getPrice());
+            } 
+        });
+        tableModel.fireTableDataChanged();
+        ShowCar();
+    }//GEN-LAST:event_bntSortDowActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
@@ -379,6 +407,19 @@ public class TableFrom extends javax.swing.JFrame {
         tableCar.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_txtSrearchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Collections.sort(listCar,new Comparator<Car>(){
+            @Override
+            public int compare(Car o2, Car o1) {
+                return Float.compare(o2.getPrice(), o1.getPrice());
+            } 
+        });
+        tableModel.fireTableDataChanged();
+        ShowCar();
+                                             
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,7 +463,8 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JButton bntAdd;
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntEdit;
-    private javax.swing.JButton bntSearch;
+    private javax.swing.JButton bntSortDow;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -431,6 +473,7 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableCar;
     private javax.swing.JTextField txtId;
@@ -458,5 +501,11 @@ public class TableFrom extends javax.swing.JFrame {
         };
         tableModel.insertRow(editeIndex, rowData);
         tableModel.fireTableDataChanged();
+    }
+    public void ShowCar(){
+        tableModel.setRowCount(0);
+        listCar.forEach(car -> {
+            showCar(car);
+        });
     }
 }
