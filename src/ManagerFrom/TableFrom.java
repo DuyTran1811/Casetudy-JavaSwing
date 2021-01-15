@@ -21,6 +21,12 @@ public class TableFrom extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     private List<Car> listCar;
     private int stt;
+    private int editeIndex;
+
+    private enum ActionState {
+        ADD, EDIT
+    }
+    private ActionState actionState;   // Hành Động
 
     /**
      * Creates new form TableFrom
@@ -31,6 +37,8 @@ public class TableFrom extends javax.swing.JFrame {
         listCar = new ArrayList<>();
         tableModel = (DefaultTableModel) tableCar.getModel();
         stt = 1;
+        editeIndex = -1;
+        actionState = ActionState.ADD;
     }
 
     /**
@@ -282,20 +290,48 @@ public class TableFrom extends javax.swing.JFrame {
             int seat = Integer.parseInt(ComboboxSeat.getSelectedItem().toString());
             String year = txtYear.getText();
             Car car = new Car(id, name, brand, price, color, seat, year);
-            if (listCar.contains(car)) {
-                JOptionPane.showMessageDialog(rootPane, "Đã Tồn Tại");
-            } else {
-                listCar.add(car);
-                showCar(car);
-                JOptionPane.showMessageDialog(rootPane, "Thêm Thành Công");
+            if (actionState == ActionState.ADD) {
+                if (listCar.contains(car)) {
+                    JOptionPane.showMessageDialog(rootPane, "Đã Tồn Tại");
+                } else {
+                    listCar.add(car);
+                    showCar(car);
+                    JOptionPane.showMessageDialog(rootPane, "Thêm Thành Công");
+                }
+            } else if (actionState == ActionState.EDIT) {
+                updateTable(car);
+                actionState = ActionState.EDIT;
+                bntAdd.setText("Them");
             }
-        }else{
-           JOptionPane.showMessageDialog(rootPane, "Cac O Khong Duoc De Trong");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Cac O Khong Duoc De Trong");
         }
     }//GEN-LAST:event_bntAddActionPerformed
 
     private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
         // TODO add your handling code here:
+        if (listCar.size() > 0) {
+            editeIndex = tableCar.getSelectedRow();
+            if (editeIndex != -1) {
+                Car car = listCar.get(editeIndex);
+                txtId.setText(car.getId());
+                txtName.setText(car.getName());
+                txtYear.setText(car.getYear());
+//                int comboboxSize = ComboboxBrand.getItemCount();
+//                for (int i = 0; i < comboboxSize; i++) {
+//                    if (car.getBrand().compareTo(ComboboxBrand.getItemAt(i)) == 0) {
+//                        ComboboxBrand.setSelectedIndex(i);
+//                        break;
+//                    }
+//                }
+                bntAdd.setText("Update");
+                actionState = ActionState.EDIT;
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Vui Lòng Chọn Chức Năng Để Sửa !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Chuc Nang Chua Kha Dung");
+        }
     }//GEN-LAST:event_bntEditActionPerformed
 
     private void bntDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeleteActionPerformed
@@ -376,6 +412,17 @@ public class TableFrom extends javax.swing.JFrame {
             car.getPrice(), car.getSeat(), car.getYear()
         };
         tableModel.addRow(row);
+        tableModel.fireTableDataChanged();
+    }
+    
+    private void updateTable(Car car) {
+        listCar.set(editeIndex,car);
+        tableModel.removeRow(editeIndex);
+        Object[] rowData = new Object[]{
+            editeIndex +1, car.getId(), car.getName(), car.getBrand(), car.getColor(),
+            car.getPrice(), car.getSeat(), car.getYear()
+        };
+        tableModel.insertRow(editeIndex, rowData);
         tableModel.fireTableDataChanged();
     }
 }
