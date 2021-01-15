@@ -5,13 +5,17 @@
  */
 package DataController;
 
-import Model.Car;
 import java.util.List;
 
 /**
  *
  * @author turtle
  */
-public interface SortPrice {
-    void sortPeice(List<Car> car);
+public interface Data {
+
+    String CARFILE = "FileCar.txt";
+
+    <T> void WriterToFile(List<T> data, String fileName);
+
+    <T> List <T> ReadDataFromFile(String fileName);
 }

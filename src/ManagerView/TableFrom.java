@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ManagerFrom;
+package ManagerView;
 
-import Model.Car;
+import ManagerModel.Car;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -29,7 +28,7 @@ public class TableFrom extends javax.swing.JFrame {
     private enum ActionState {
         ADD, EDIT
     }
-    private ActionState actionState;   // Hành Động
+    private ActionState actionState;   // Edit or ADD
 
     /**
      * Creates new form TableFrom
@@ -63,7 +62,6 @@ public class TableFrom extends javax.swing.JFrame {
         bntAdd = new javax.swing.JButton();
         bntEdit = new javax.swing.JButton();
         bntDelete = new javax.swing.JButton();
-        bntSortDow = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCar = new javax.swing.JTable();
         txtId = new javax.swing.JTextField();
@@ -76,17 +74,16 @@ public class TableFrom extends javax.swing.JFrame {
         txtYear = new javax.swing.JTextField();
         txtSrearch = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        ComboboxSort = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 580));
 
         jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Thêm Thông Tin");
 
         jLabel2.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
-        jLabel2.setText("Số Khung");
+        jLabel2.setText("Số Máy");
 
         jLabel3.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
         jLabel3.setText("Tên Xe");
@@ -127,14 +124,6 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
-        bntSortDow.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
-        bntSortDow.setText("Giam Dan");
-        bntSortDow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSortDowActionPerformed(evt);
-            }
-        });
-
         tableCar.setFont(new java.awt.Font(".SF NS Text", 0, 12)); // NOI18N
         tableCar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,6 +149,9 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableCar);
+        if (tableCar.getColumnModel().getColumnCount() > 0) {
+            tableCar.getColumnModel().getColumn(0).setHeaderValue("STT");
+        }
 
         txtId.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
 
@@ -195,10 +187,11 @@ public class TableFrom extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
         jLabel9.setText("Tìm Kiếm");
 
-        jButton1.setText("Tang Dan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ComboboxSort.setFont(new java.awt.Font(".SF NS Text", 1, 14)); // NOI18N
+        ComboboxSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp Xếp Giá Giảm Dần", "Sắp Xếp Giá Tăng Dần" }));
+        ComboboxSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ComboboxSortActionPerformed(evt);
             }
         });
 
@@ -233,25 +226,23 @@ public class TableFrom extends javax.swing.JFrame {
                                 .addComponent(ComboboxSeat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGap(13, 13, 13)
-                                            .addComponent(bntEdit)
-                                            .addGap(29, 29, 29)
-                                            .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(51, 51, 51)
-                                            .addComponent(bntSortDow)
-                                            .addGap(56, 56, 56)
-                                            .addComponent(jButton1))
-                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel9)
+                                            .addGap(27, 27, 27)
+                                            .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(19, 19, 19)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(bntEdit)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntAdd)
@@ -300,8 +291,7 @@ public class TableFrom extends javax.swing.JFrame {
                     .addComponent(bntAdd)
                     .addComponent(bntEdit)
                     .addComponent(bntDelete)
-                    .addComponent(bntSortDow)
-                    .addComponent(jButton1))
+                    .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -331,13 +321,16 @@ public class TableFrom extends javax.swing.JFrame {
                 actionState = ActionState.EDIT;
                 bntAdd.setText("Them");
             }
+            txtId.setText("");
+            txtName.setText("");
+            txtPrice.setText("");
+            txtYear.setText("");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Cac O Khong Duoc De Trong");
         }
     }//GEN-LAST:event_bntAddActionPerformed
 
     private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
-        // TODO add your handling code here:
         if (listCar.size() > 0) {
             editeIndex = tableCar.getSelectedRow();
             if (editeIndex != -1) {
@@ -345,13 +338,6 @@ public class TableFrom extends javax.swing.JFrame {
                 txtId.setText(car.getId());
                 txtName.setText(car.getName());
                 txtYear.setText(car.getYear());
-//                int comboboxSize = ComboboxBrand.getItemCount();
-//                for (int i = 0; i < comboboxSize; i++) {
-//                    if (car.getBrand().compareTo(ComboboxBrand.getItemAt(i)) == 0) {
-//                        ComboboxBrand.setSelectedIndex(i);
-//                        break;
-//                    }
-//                }
                 bntAdd.setText("Update");
                 actionState = ActionState.EDIT;
             } else {
@@ -383,18 +369,6 @@ public class TableFrom extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntDeleteActionPerformed
 
-    private void bntSortDowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSortDowActionPerformed
-        // TODO add your handling code here:
-        Collections.sort(listCar,new Comparator<Car>(){
-            @Override
-            public int compare(Car o1, Car o2) {
-                return Float.compare(o2.getPrice(), o1.getPrice());
-            } 
-        });
-        tableModel.fireTableDataChanged();
-        ShowCar();
-    }//GEN-LAST:event_bntSortDowActionPerformed
-
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
@@ -408,18 +382,21 @@ public class TableFrom extends javax.swing.JFrame {
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_txtSrearchKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ComboboxSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboboxSortActionPerformed
         // TODO add your handling code here:
-        Collections.sort(listCar,new Comparator<Car>(){
-            @Override
-            public int compare(Car o2, Car o1) {
-                return Float.compare(o2.getPrice(), o1.getPrice());
-            } 
-        });
+        if (ComboboxSort.getSelectedIndex()==0) {
+            Collections.sort(listCar, (Car o1, Car o2)-> 
+                    Float.compare(o2.getPrice(), o1.getPrice()));
         tableModel.fireTableDataChanged();
         ShowCar();
-                                             
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }
+        if (ComboboxSort.getSelectedIndex()==1) {
+            Collections.sort(listCar, (Car o2, Car o1) -> 
+                    Float.compare(o2.getPrice(), o1.getPrice()));
+        tableModel.fireTableDataChanged();
+        ShowCar();
+        }
+    }//GEN-LAST:event_ComboboxSortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,10 +426,8 @@ public class TableFrom extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TableFrom().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TableFrom().setVisible(true);
         });
     }
 
@@ -460,11 +435,10 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComBoboxColor;
     private javax.swing.JComboBox<String> ComboboxBrand;
     private javax.swing.JComboBox<String> ComboboxSeat;
+    private javax.swing.JComboBox<String> ComboboxSort;
     private javax.swing.JButton bntAdd;
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntEdit;
-    private javax.swing.JButton bntSortDow;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

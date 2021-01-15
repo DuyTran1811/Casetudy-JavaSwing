@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ManagerFrom;
+package ManagerView;
 
-import Model.AccountLogin;
+import ManagerModel.AccountLogin;
 
 /**
  *
@@ -42,7 +42,6 @@ public class HomeFrom extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(750, 480));
 
         jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package ManagerModel;
+
+import java.io.Serializable;
 
 /**
  *
  * @author turtle
  */
-public class Car {
+public class Car implements Serializable{
     private String id;    // Số Khung
     private String name;  // Tên Xe
     private String brand; // Hãng
