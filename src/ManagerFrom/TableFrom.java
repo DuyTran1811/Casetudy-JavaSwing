@@ -9,7 +9,6 @@ import Model.Car;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -76,7 +75,7 @@ public class TableFrom extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 580));
 
-        jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Thêm Thông Tin");
 
@@ -187,8 +186,8 @@ public class TableFrom extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(231, 231, 231)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(bntSearch)
@@ -274,7 +273,7 @@ public class TableFrom extends javax.swing.JFrame {
                     .addComponent(bntAdd)
                     .addComponent(bntEdit)
                     .addComponent(bntDelete))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,6 +335,24 @@ public class TableFrom extends javax.swing.JFrame {
 
     private void bntDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeleteActionPerformed
         // TODO add your handling code here:
+        if (listCar.size() > 0) {
+            int selectIndex = tableCar.getSelectedRow();
+            if (selectIndex != -1) {
+                int result = JOptionPane.showConfirmDialog(rootPane,
+                        "Bạn Muốn Xoá Không");
+                if (result == JOptionPane.YES_OPTION) {
+                    listCar.remove(selectIndex);
+                    tableModel.removeRow(selectIndex);
+                    tableModel.fireTableDataChanged();
+                    JOptionPane.showMessageDialog(rootPane, "Xoá Thành Công");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Chọn Một Ròng Để Xoá");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Chức Năng Hiện Chưa Khả Dụng");
+        }
     }//GEN-LAST:event_bntDeleteActionPerformed
 
     private void bntSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSearchActionPerformed
@@ -414,12 +431,12 @@ public class TableFrom extends javax.swing.JFrame {
         tableModel.addRow(row);
         tableModel.fireTableDataChanged();
     }
-    
+
     private void updateTable(Car car) {
-        listCar.set(editeIndex,car);
+        listCar.set(editeIndex, car);
         tableModel.removeRow(editeIndex);
         Object[] rowData = new Object[]{
-            editeIndex +1, car.getId(), car.getName(), car.getBrand(), car.getColor(),
+            editeIndex + 1, car.getId(), car.getName(), car.getBrand(), car.getColor(),
             car.getPrice(), car.getSeat(), car.getYear()
         };
         tableModel.insertRow(editeIndex, rowData);
