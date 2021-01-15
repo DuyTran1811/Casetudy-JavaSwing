@@ -8,6 +8,8 @@ package ManagerFrom;
 import Model.Car;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,9 +17,11 @@ import javax.swing.table.DefaultTableModel;
  * @author turtle
  */
 public class TableFrom extends javax.swing.JFrame {
+
     private DefaultTableModel tableModel;
-    private List<Car>listCar;
+    private List<Car> listCar;
     private int stt;
+
     /**
      * Creates new form TableFrom
      */
@@ -118,7 +122,7 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
-        tableCar.setFont(new java.awt.Font(".SF NS Text", 0, 18)); // NOI18N
+        tableCar.setFont(new java.awt.Font(".SF NS Text", 0, 12)); // NOI18N
         tableCar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -269,17 +273,25 @@ public class TableFrom extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddActionPerformed
-        // TODO add your handling code here:
         String id = txtId.getText();
         String name = txtName.getText();
-        String brand = ComboboxBrand.getSelectedItem().toString();
-        float price = Float.parseFloat(txtPrice.getText());
-        String color = (String) ComBoboxColor.getSelectedItem();
-        int seat = Integer.parseInt(ComBoboxColor.getSelectedItem().toString());
-        String year = txtYear.getText();
-        Car car = new Car(id,name,brand,price,color,seat,year);
-        listCar.add(car);
-        showCar(car);
+        if (!id.isEmpty() && !name.isEmpty()) {
+            String brand = ComboboxBrand.getSelectedItem().toString();
+            float price = Float.parseFloat(txtPrice.getText());
+            String color = ComBoboxColor.getSelectedItem().toString();
+            int seat = Integer.parseInt(ComboboxSeat.getSelectedItem().toString());
+            String year = txtYear.getText();
+            Car car = new Car(id, name, brand, price, color, seat, year);
+            if (listCar.contains(car)) {
+                JOptionPane.showMessageDialog(rootPane, "Đã Tồn Tại");
+            } else {
+                listCar.add(car);
+                showCar(car);
+                JOptionPane.showMessageDialog(rootPane, "Thêm Thành Công");
+            }
+        }else{
+           JOptionPane.showMessageDialog(rootPane, "Cac O Khong Duoc De Trong");
+        }
     }//GEN-LAST:event_bntAddActionPerformed
 
     private void bntEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditActionPerformed
@@ -359,9 +371,9 @@ public class TableFrom extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void showCar(Car car) {
-        var row = new Object[]{
-            stt++,car.getId(),car.getName(),car.getBrand(),car.getPrice(),
-            car.getColor(),car.getSeat(),car.getYear()
+        Object[] row = new Object[]{
+            stt++, car.getId(), car.getName(), car.getBrand(), car.getColor(),
+            car.getPrice(), car.getSeat(), car.getYear()
         };
         tableModel.addRow(row);
         tableModel.fireTableDataChanged();
