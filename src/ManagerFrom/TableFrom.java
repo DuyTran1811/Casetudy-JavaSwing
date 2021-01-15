@@ -9,7 +9,9 @@ import Model.Car;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -70,7 +72,7 @@ public class TableFrom extends javax.swing.JFrame {
         txtPrice = new javax.swing.JTextField();
         ComboboxSeat = new javax.swing.JComboBox<>();
         txtYear = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtSrearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 580));
@@ -180,6 +182,12 @@ public class TableFrom extends javax.swing.JFrame {
 
         txtYear.setFont(new java.awt.Font(".SF NS Text", 0, 14)); // NOI18N
 
+        txtSrearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSrearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,7 +196,7 @@ public class TableFrom extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(bntSearch)
                 .addGap(78, 78, 78))
@@ -237,7 +245,7 @@ public class TableFrom extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(bntSearch)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -363,6 +371,15 @@ public class TableFrom extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
 
+    private void txtSrearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSrearchKeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel) tableCar.getModel();
+        String search = txtSrearch.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(table);
+        tableCar.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_txtSrearchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -415,11 +432,11 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tableCar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSrearch;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 
