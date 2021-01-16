@@ -5,6 +5,7 @@
  */
 package ManagerView;
 
+import DataController.DataController;
 import ManagerModel.Car;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +25,9 @@ public class TableFrom extends javax.swing.JFrame {
     private List<Car> listCar;
     private int stt;
     private int editeIndex;
+    private DataController dataController;
 
+   
     private enum ActionState {
         ADD, EDIT
     }
@@ -41,6 +44,10 @@ public class TableFrom extends javax.swing.JFrame {
         stt = 1;
         editeIndex = -1;
         actionState = ActionState.ADD;
+        dataController = new DataController();
+        loadData();
+        showData();
+       
     }
 
     /**
@@ -313,7 +320,8 @@ public class TableFrom extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Đã Tồn Tại");
                 } else {
                     listCar.add(car);
-                    showCar(car);
+                    show(car);
+                    saveData();
                     JOptionPane.showMessageDialog(rootPane, "Thêm Thành Công");
                 }
             } else if (actionState == ActionState.EDIT) {
@@ -457,7 +465,7 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 
-    private void showCar(Car car) {
+    private void show(Car car) {
         Object[] row = new Object[]{
             stt++, car.getId(), car.getName(), car.getBrand(), car.getColor(),
             car.getPrice(), car.getSeat(), car.getYear()
@@ -479,7 +487,22 @@ public class TableFrom extends javax.swing.JFrame {
     public void ShowCar(){
         tableModel.setRowCount(0);
         listCar.forEach(car -> {
-            showCar(car);
+            show(car);
+        });
+    }
+     private void loadData() {
+         listCar = dataController.<Car>ReadDataFromFile(DataController.CARFILE);
+    }
+     private void saveData(){
+         dataController.<Car>WriterToFile(listCar, DataController.CARFILE);
+     }
+     private void showData() {
+         showCar();
+    }
+     
+      private void showCar() {
+          listCar.forEach(car -> {
+              show(car);
         });
     }
 }

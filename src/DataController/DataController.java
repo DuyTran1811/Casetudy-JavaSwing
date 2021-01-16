@@ -21,12 +21,12 @@ import java.util.logging.Logger;
  *
  * @author turtle
  */
-public class DataController implements Data{
+public class DataController implements Data {
 
     @Override
     public <T> void WriterToFile(List<T> data, String fileName) {
-        try(FileOutputStream fos = new FileOutputStream(fileName);
-                ObjectOutputStream oos = new ObjectOutputStream(fos)){
+        try (FileOutputStream fos = new FileOutputStream(fileName);
+                ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(data);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
@@ -36,18 +36,20 @@ public class DataController implements Data{
     }
 
     @Override
-    public <T> List <T> ReadDataFromFile(String filename) {
+    public <T> List<T> ReadDataFromFile(String filename) {
         File file = new File(filename);
         List<T> data = new ArrayList<>();
-        try(FileInputStream fis = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(fis)){
-            data = (List<T>) ois.readObject();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        if (file.length() > 0) {
+            try (FileInputStream fis = new FileInputStream(file);
+                    ObjectInputStream ois = new ObjectInputStream(fis)) {
+                data = (List<T>) ois.readObject();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return data;
     }
-    
+
 }
