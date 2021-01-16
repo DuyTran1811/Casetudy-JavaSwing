@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ManagerView;
+package View;
 
 import DataController.DataController;
-import ManagerModel.Car;
+import Model.Car;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +27,6 @@ public class TableFrom extends javax.swing.JFrame {
     private int editeIndex;
     private DataController dataController;
 
-   
     private enum ActionState {
         ADD, EDIT
     }
@@ -47,7 +46,7 @@ public class TableFrom extends javax.swing.JFrame {
         dataController = new DataController();
         loadData();
         showData();
-       
+
     }
 
     /**
@@ -82,6 +81,7 @@ public class TableFrom extends javax.swing.JFrame {
         txtSrearch = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         ComboboxSort = new javax.swing.JComboBox<>();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,6 +202,14 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        btnExit.setText("Thoát ");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,7 +241,7 @@ public class TableFrom extends javax.swing.JFrame {
                                 .addComponent(ComboboxSeat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel9)
@@ -249,7 +257,10 @@ public class TableFrom extends javax.swing.JFrame {
                                         .addGap(29, 29, 29)
                                         .addComponent(bntDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(71, 71, 71)
-                                        .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnExit)
+                                        .addGap(71, 71, 71)))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntAdd)
@@ -298,7 +309,8 @@ public class TableFrom extends javax.swing.JFrame {
                     .addComponent(bntAdd)
                     .addComponent(bntEdit)
                     .addComponent(bntDelete)
-                    .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -327,14 +339,14 @@ public class TableFrom extends javax.swing.JFrame {
             } else if (actionState == ActionState.EDIT) {
                 updateTable(car);
                 actionState = ActionState.EDIT;
-                bntAdd.setText("Them");
+                bntAdd.setText("Thêm");
             }
             txtId.setText("");
             txtName.setText("");
             txtPrice.setText("");
             txtYear.setText("");
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Cac O Khong Duoc De Trong");
+            JOptionPane.showMessageDialog(rootPane, "Các Ô Không Được Để Trống");
         }
     }//GEN-LAST:event_bntAddActionPerformed
 
@@ -352,7 +364,7 @@ public class TableFrom extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Vui Lòng Chọn Chức Năng Để Sửa !");
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Chuc Nang Chua Kha Dung");
+            JOptionPane.showMessageDialog(rootPane, "Chức Năng Chưa Khả Dụng");
         }
     }//GEN-LAST:event_bntEditActionPerformed
 
@@ -382,29 +394,30 @@ public class TableFrom extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceActionPerformed
 
     private void txtSrearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSrearchKeyReleased
-        // TODO add your handling code here:
-        DefaultTableModel table = (DefaultTableModel) tableCar.getModel();
         String search = txtSrearch.getText();
-        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(table);
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(tableModel);
         tableCar.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_txtSrearchKeyReleased
 
     private void ComboboxSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboboxSortActionPerformed
-        // TODO add your handling code here:
-        if (ComboboxSort.getSelectedIndex()==0) {
-            Collections.sort(listCar, (Car o1, Car o2)-> 
-                    Float.compare(o2.getPrice(), o1.getPrice()));
-        tableModel.fireTableDataChanged();
-        ShowCar();
+        if (ComboboxSort.getSelectedIndex() == 0) {
+            Collections.sort(listCar, (Car o1, Car o2)
+                    -> Float.compare(o2.getPrice(), o1.getPrice()));
+            tableModel.fireTableDataChanged();
+            ShowCar();
         }
-        if (ComboboxSort.getSelectedIndex()==1) {
-            Collections.sort(listCar, (Car o2, Car o1) -> 
-                    Float.compare(o2.getPrice(), o1.getPrice()));
-        tableModel.fireTableDataChanged();
-        ShowCar();
+        if (ComboboxSort.getSelectedIndex() == 1) {
+            Collections.sort(listCar, (Car o2, Car o1)
+                    -> Float.compare(o2.getPrice(), o1.getPrice()));
+            tableModel.fireTableDataChanged();
+            ShowCar();
         }
     }//GEN-LAST:event_ComboboxSortActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,6 +460,7 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JButton bntAdd;
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntEdit;
+    private javax.swing.JButton btnExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -484,25 +498,29 @@ public class TableFrom extends javax.swing.JFrame {
         tableModel.insertRow(editeIndex, rowData);
         tableModel.fireTableDataChanged();
     }
-    public void ShowCar(){
+
+    public void ShowCar() {
         tableModel.setRowCount(0);
         listCar.forEach(car -> {
             show(car);
         });
     }
-     private void loadData() {
-         listCar = dataController.<Car>ReadDataFromFile(DataController.CARFILE);
+
+    private void loadData() {
+        listCar = dataController.<Car>ReadDataFromFile(DataController.CAR_FILE);
     }
-     private void saveData(){
-         dataController.<Car>WriterToFile(listCar, DataController.CARFILE);
-     }
-     private void showData() {
-         showCar();
+
+    private void saveData() {
+        dataController.<Car>WriterToFile(listCar, DataController.CAR_FILE);
     }
-     
-      private void showCar() {
-          listCar.forEach(car -> {
-              show(car);
+
+    private void showData() {
+        showCar();
+    }
+
+    private void showCar() {
+        listCar.forEach(car -> {
+            show(car);
         });
     }
 }

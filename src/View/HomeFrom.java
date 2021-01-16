@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ManagerView;
+package View;
 
-import ManagerModel.AccountLogin;
+import Model.AccountLogin;
 
 /**
  *
@@ -39,7 +39,7 @@ public class HomeFrom extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtGreting = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +54,13 @@ public class HomeFrom extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Bạn đã đăng nhập Thành công");
 
-        jButton1.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
-        jButton1.setText("OK");
+        btnOk.setFont(new java.awt.Font(".SF NS Text", 1, 36)); // NOI18N
+        btnOk.setText("OK");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,7 +74,7 @@ public class HomeFrom extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnOk)
                 .addGap(331, 331, 331))
             .addGroup(layout.createSequentialGroup()
                 .addGap(317, 317, 317)
@@ -86,12 +91,19 @@ public class HomeFrom extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnOk)
                 .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        // TODO add your handling code here:
+        TableFrom tableFrom = new TableFrom();
+        tableFrom.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnOkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,7 +141,7 @@ public class HomeFrom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnOk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel txtGreting;

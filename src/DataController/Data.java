@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface Data {
 
-    String CARFILE = "FileCar.txt";
+    String CAR_FILE = "FileCar.txt";
 
     <T> void WriterToFile(List<T> data, String fileName);
 

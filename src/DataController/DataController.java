@@ -51,5 +51,4 @@ public class DataController implements Data {
         }
         return data;
     }
-
 }
