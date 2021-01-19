@@ -7,6 +7,7 @@ package View;
 
 import DataController.DataController;
 import Model.Car;
+import Model.brand1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -82,6 +83,7 @@ public class TableFrom extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         ComboboxSort = new javax.swing.JComboBox<>();
         btnExit = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -210,14 +212,12 @@ public class TableFrom extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new brand1());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,6 +265,15 @@ public class TableFrom extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntAdd)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +283,9 @@ public class TableFrom extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtSrearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -311,7 +322,7 @@ public class TableFrom extends javax.swing.JFrame {
                     .addComponent(bntDelete)
                     .addComponent(ComboboxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExit))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,8 +413,7 @@ public class TableFrom extends javax.swing.JFrame {
 
     private void ComboboxSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboboxSortActionPerformed
         if (ComboboxSort.getSelectedIndex() == 0) {
-            Collections.sort(listCar, (Car o1, Car o2)
-                    -> Float.compare(o2.getPrice(), o1.getPrice()));
+            Collections.sort(listCar, (Car o1, Car o2)-> Float.compare(o2.getPrice(), o1.getPrice()));
             tableModel.fireTableDataChanged();
             ShowCar();
         }
@@ -461,6 +471,7 @@ public class TableFrom extends javax.swing.JFrame {
     private javax.swing.JButton bntDelete;
     private javax.swing.JButton bntEdit;
     private javax.swing.JButton btnExit;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
